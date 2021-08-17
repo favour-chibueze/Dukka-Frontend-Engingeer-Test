@@ -1,5 +1,4 @@
 import React from "react";
-import SideMenu from "./SideMenu";
 import SideDrawer from "./SideDrawer";
 import NavBar from './NavBar';
 import Backdrop from "./Backdrop";

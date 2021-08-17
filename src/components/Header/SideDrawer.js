@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const sideDrawer = props => {
     let drawerClasses = ["side-drawer"];
-    let closeBtn =["side-drawer"]
   
     if (props.show) {
       drawerClasses = ["side-drawer", "open"];
