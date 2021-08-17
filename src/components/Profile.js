@@ -27,18 +27,36 @@ class Profile extends React.Component {
         }
 
         handleDelete(e) {
-            let allProfiles = JSON.parse(localStorage.getItem("profile"))
-            let deleteProfileId = this.props.profile.id
-            const index = allProfiles.findIndex((profile, index) => {
-                return profile.id === deleteProfileId
-            })
-            allProfiles.splice(index, 1)
-            this.setState({
-                profiles: allProfiles
-            }, () => {
-                window.localStorage.setItem("profile", JSON.stringify(allProfiles))
-                this.props.updateProfile()
-            });
+            MySwal.fire({
+                title: 'Delete Profile?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    let allProfiles = JSON.parse(localStorage.getItem("profile"))
+                    let deleteProfileId = this.props.profile.id
+                    const index = allProfiles.findIndex((profile, index) => {
+                        return profile.id === deleteProfileId
+                    })
+                    allProfiles.splice(index, 1)
+                    this.setState({
+                        profiles: allProfiles
+                    }, () => {
+                        window.localStorage.setItem("profile", JSON.stringify(allProfiles));
+                        this.props.updateProfile();
+                        MySwal.fire(
+                            'Deleted!',
+                            'Your profile has been deleted.',
+                            'success'
+                          )
+                    });
+                }
+              })
+            
         }
 
     render() {
